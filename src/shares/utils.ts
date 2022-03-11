@@ -26,3 +26,7 @@ export const rootMongooseTestModule = (options: MongooseModuleOptions = {}) =>
 export const closeInMongodConnection = async () => {
   if (mongod) await mongod.stop();
 };
+
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

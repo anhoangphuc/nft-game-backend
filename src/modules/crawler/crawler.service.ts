@@ -17,7 +17,6 @@ export class CrawlerService {
       const newCrawler = new this.crawlersModel({
         crawlerName,
         crawlerGroup: config.configCrawler.crawlerGroup,
-        //TODO define last block
         lastBlock: config.configCrawler.fromBlock,
       });
       await newCrawler.save();
