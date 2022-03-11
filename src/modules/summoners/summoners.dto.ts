@@ -1,8 +1,7 @@
-import {Exclude, Expose} from "class-transformer";
-import {IsEnum, IsNumber} from "class-validator";
-import {Schema} from "mongoose";
-import {SummonersClass} from "./summoners.cls.enum";
-import {ApiProperty} from "@nestjs/swagger";
+import { Exclude, Expose } from 'class-transformer';
+import { IsEnum } from 'class-validator';
+import { SummonersClass } from './summoners.cls.enum';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Exclude()
 export class SummonersPublicInfoResponseDto {

@@ -1,8 +1,14 @@
-import {Controller, Get, HttpStatus, Param, ParseIntPipe} from '@nestjs/common';
-import {ApiOperation, ApiParam, ApiResponse} from "@nestjs/swagger";
-import {SummonersPublicInfoResponseDto} from "./summoners.dto";
-import {SummonersService} from "./summoners.service";
-import {plainToClass} from "class-transformer";
+import {
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+} from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import { SummonersPublicInfoResponseDto } from './summoners.dto';
+import { SummonersService } from './summoners.service';
+import { plainToClass } from 'class-transformer';
 
 @Controller('summoners')
 export class SummonersController {
@@ -17,8 +23,8 @@ export class SummonersController {
     status: HttpStatus.OK,
     description: 'Successful',
   })
-  async helloSummoners(): Promise<String> {
-    return "Hello Summoners";
+  async helloSummoners(): Promise<string> {
+    return 'Hello Summoners';
   }
 
   @Get('/:id')
@@ -35,7 +41,9 @@ export class SummonersController {
     status: HttpStatus.OK,
     description: 'Successful',
   })
-  async getPublicSummonerInfo(@Param('id', ParseIntPipe) summonerId: number): Promise<SummonersPublicInfoResponseDto> {
+  async getPublicSummonerInfo(
+    @Param('id', ParseIntPipe) summonerId: number,
+  ): Promise<SummonersPublicInfoResponseDto> {
     const summoner = await this.summonersService.getSummonersInfo(summonerId);
     return plainToClass(SummonersPublicInfoResponseDto, summoner);
   }

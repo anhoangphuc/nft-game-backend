@@ -1,11 +1,11 @@
-import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
-import {Transform} from "class-transformer";
-import {ObjectId, Document} from "mongoose";
-import {SummonersClass} from "./summoners.cls.enum";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Transform } from 'class-transformer';
+import { ObjectId, Document } from 'mongoose';
+import { SummonersClass } from './summoners.cls.enum';
 
 @Schema({ timestamps: true })
 export class Summoners {
-  @Transform(({ value}) => value.toString())
+  @Transform(({ value }) => value.toString())
   _id: ObjectId;
 
   @Prop({

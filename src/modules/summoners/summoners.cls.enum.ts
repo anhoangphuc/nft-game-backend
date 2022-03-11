@@ -1,9 +1,9 @@
-import {randomMinMax} from "../../shares/utils";
+import { randomMinMax } from '../../shares/utils';
 
 export enum SummonersClass {
-  FIGHTER = "fighter",
-  FARMER = "farmer",
-  HEALER = "healer",
+  FIGHTER = 'fighter',
+  FARMER = 'farmer',
+  HEALER = 'healer',
 }
 
 export function getARandomSummonerClass(): SummonersClass {

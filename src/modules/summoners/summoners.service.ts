@@ -1,14 +1,15 @@
-import {Injectable} from '@nestjs/common';
-import {InjectModel} from "@nestjs/mongoose";
-import {Summoners, SummonersDocument} from "./summoners.schema";
-import {ClientSession, Model} from 'mongoose';
-import {randomMinMax} from "../../shares/utils";
-import {getARandomSummonerClass} from "./summoners.cls.enum";
-import {SummonerNotExistException} from "./summoners.exceptions";
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Summoners, SummonersDocument } from './summoners.schema';
+import { ClientSession, Model } from 'mongoose';
+import { randomMinMax } from '../../shares/utils';
+import { getARandomSummonerClass } from './summoners.cls.enum';
+import { SummonerNotExistException } from './summoners.exceptions';
 @Injectable()
 export class SummonersService {
   constructor(
-    @InjectModel(Summoners.name) private summonersModel: Model<SummonersDocument>,
+    @InjectModel(Summoners.name)
+    private summonersModel: Model<SummonersDocument>,
   ) {}
 
   async startTransaction(): Promise<ClientSession> {
@@ -17,7 +18,10 @@ export class SummonersService {
     return session;
   }
 
-  async createRandomSummoner(userAddress: string, summonerId: number): Promise<SummonersDocument> {
+  async createRandomSummoner(
+    userAddress: string,
+    summonerId: number,
+  ): Promise<SummonersDocument> {
     try {
       return await this.summonersModel.create({
         summonerId,
@@ -33,7 +37,8 @@ export class SummonersService {
 
   async getSummonersInfo(summonerId: number): Promise<SummonersDocument> {
     const summoner = await this.summonersModel.findOne({ summonerId });
-    if (summoner === null || summoner === undefined) throw new SummonerNotExistException(summonerId);
+    if (summoner === null || summoner === undefined)
+      throw new SummonerNotExistException(summonerId);
     return summoner;
   }
 }
