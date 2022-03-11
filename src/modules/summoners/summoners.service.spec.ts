@@ -1,9 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { SummonersService } from './summoners.service';
+import {Test, TestingModule} from '@nestjs/testing';
+import {SummonersService} from './summoners.service';
 import {Summoners, SummonersSchema} from "./summoners.schema";
 import {closeInMongodConnection, rootMongooseTestModule} from "../../shares/utils";
 import {MongooseModule} from "@nestjs/mongoose";
-import exp from "constants";
+import {SummonersClass} from "./summoners.cls.enum";
 
 describe('SummonersService', () => {
   let service: SummonersService;
@@ -30,6 +30,9 @@ describe('SummonersService', () => {
     expect(summoner.summonerId).toEqual(1);
     expect(summoner.strength).toBeGreaterThanOrEqual(1);
     expect(summoner.strength).toBeLessThan(100);
+    expect(summoner.power).toBeGreaterThanOrEqual(1);
+    expect(summoner.power).toBeLessThan(100);
+    expect([SummonersClass.FARMER, SummonersClass.FIGHTER, SummonersClass.HEALER]).toContain(summoner.cls);
   });
 
   afterAll(async () => {
