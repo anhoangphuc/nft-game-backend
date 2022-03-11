@@ -21,4 +21,10 @@ export class BaseEvent {
     type: Number,
   })
   blockTimestamp: number;
+
+  @Prop({
+    type: Boolean,
+    default: false,
+  })
+  isResolved: boolean;
 }
