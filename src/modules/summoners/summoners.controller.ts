@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  HttpStatus,
-  Param,
-  ParseIntPipe,
-} from '@nestjs/common';
+import { Controller, Get, HttpStatus, Param, ParseIntPipe } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { SummonersPublicInfoResponseDto } from './summoners.dto';
 import { SummonersService } from './summoners.service';
@@ -41,9 +35,7 @@ export class SummonersController {
     status: HttpStatus.OK,
     description: 'Successful',
   })
-  async getPublicSummonerInfo(
-    @Param('id', ParseIntPipe) summonerId: number,
-  ): Promise<SummonersPublicInfoResponseDto> {
+  async getPublicSummonerInfo(@Param('id', ParseIntPipe) summonerId: number): Promise<SummonersPublicInfoResponseDto> {
     const summoner = await this.summonersService.getSummonersInfo(summonerId);
     return plainToClass(SummonersPublicInfoResponseDto, summoner);
   }

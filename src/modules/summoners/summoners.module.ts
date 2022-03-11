@@ -5,11 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Summoners, SummonersSchema } from './summoners.schema';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      { name: Summoners.name, schema: SummonersSchema },
-    ]),
-  ],
+  imports: [MongooseModule.forFeature([{ name: Summoners.name, schema: SummonersSchema }])],
   controllers: [SummonersController],
   providers: [SummonersService],
 })

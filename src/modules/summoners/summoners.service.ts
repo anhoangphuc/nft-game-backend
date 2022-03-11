@@ -18,10 +18,7 @@ export class SummonersService {
     return session;
   }
 
-  async createRandomSummoner(
-    userAddress: string,
-    summonerId: number,
-  ): Promise<SummonersDocument> {
+  async createRandomSummoner(userAddress: string, summonerId: number): Promise<SummonersDocument> {
     try {
       return await this.summonersModel.create({
         summonerId,
@@ -37,8 +34,7 @@ export class SummonersService {
 
   async getSummonersInfo(summonerId: number): Promise<SummonersDocument> {
     const summoner = await this.summonersModel.findOne({ summonerId });
-    if (summoner === null || summoner === undefined)
-      throw new SummonerNotExistException(summonerId);
+    if (summoner === null || summoner === undefined) throw new SummonerNotExistException(summonerId);
     return summoner;
   }
 }
