@@ -21,6 +21,7 @@ export class SummonersService {
     try {
       return await this.summonersModel.create({
         summonerId,
+        userAddress,
         strength: randomMinMax(1, 100),
         power: randomMinMax(1, 100),
         cls: getARandomSummonerClass(),

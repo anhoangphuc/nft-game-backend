@@ -13,6 +13,12 @@ export class SummonersPublicInfoResponseDto {
   summonerId: number;
 
   @Expose()
+  @ApiProperty({
+    type: String,
+  })
+  userAddress: string;
+
+  @Expose()
   @IsEnum(SummonersClass)
   @ApiProperty({
     enum: SummonersClass,

@@ -16,6 +16,12 @@ export class Summoners {
   summonerId: number;
 
   @Prop({
+    type: String,
+    index: true,
+  })
+  userAddress: string;
+
+  @Prop({
     enum: SummonersClass,
   })
   cls: SummonersClass;

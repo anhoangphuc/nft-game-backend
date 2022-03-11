@@ -33,6 +33,7 @@ describe('SummonersController', () => {
     await service.createRandomSummoner('0x123', 1);
     const summoner = await controller.getPublicSummonerInfo(1);
     expect(summoner.summonerId).toEqual(1);
+    expect(summoner.userAddress).toEqual('0x123');
   });
 
   it(`Throw exception when get incorrect summonerId`, async () => {

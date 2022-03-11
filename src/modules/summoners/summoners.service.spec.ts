@@ -28,6 +28,7 @@ describe('SummonersService', () => {
     const summoner = await service.createRandomSummoner('0x123', 1);
     expect(summoner).toBeDefined();
     expect(summoner.summonerId).toEqual(1);
+    expect(summoner.userAddress).toEqual('0x123');
     expect(summoner.strength).toBeGreaterThanOrEqual(1);
     expect(summoner.strength).toBeLessThan(100);
     expect(summoner.power).toBeGreaterThanOrEqual(1);
