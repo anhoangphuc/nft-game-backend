@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@ethersproject/networks": "^5.6.0",
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/mongoose": "^9.0.2",
@@ -29,6 +30,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "dotenv": "^16.0.0",
+    "ethers": "^5.6.0",
     "mongoose": "^6.2.5",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

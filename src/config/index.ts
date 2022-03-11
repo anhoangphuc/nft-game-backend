@@ -8,6 +8,7 @@ config.env = env;
 
 export interface Config {
   env: string;
+  network: string;
   configCrawler: {
     fromBlock: number;
     crawlerGroup: number;
