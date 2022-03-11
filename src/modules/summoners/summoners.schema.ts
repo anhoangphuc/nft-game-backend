@@ -1,7 +1,7 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import {Transform} from "class-transformer";
 import {ObjectId, Document} from "mongoose";
-import {SummonersClass} from "./summoners.class.enum";
+import {SummonersClass} from "./summoners.cls.enum";
 
 @Schema({ timestamps: true })
 export class Summoners {

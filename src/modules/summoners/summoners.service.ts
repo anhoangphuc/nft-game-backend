@@ -3,7 +3,7 @@ import {InjectModel} from "@nestjs/mongoose";
 import {Summoners, SummonersDocument} from "./summoners.schema";
 import {ClientSession, Model} from 'mongoose';
 import {randomMinMax} from "../../shares/utils";
-import {getARandomSummonerClass} from "./summoners.class.enum";
+import {getARandomSummonerClass} from "./summoners.cls.enum";
 @Injectable()
 export class SummonersService {
   constructor(
