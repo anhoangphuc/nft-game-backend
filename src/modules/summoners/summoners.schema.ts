@@ -1,6 +1,6 @@
-import {Prop, Schema} from "@nestjs/mongoose";
+import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import {Transform} from "class-transformer";
-import {ObjectId} from "mongoose";
+import {ObjectId, Document} from "mongoose";
 import {SummonersClass} from "./summoners.class.enum";
 
 @Schema({ timestamps: true })
@@ -30,3 +30,12 @@ export class Summoners {
   })
   power: number;
 }
+
+export type SummonersDocument = Summoners & Document;
+export const SummonersSchema = SchemaFactory.createForClass(Summoners);
+SummonersSchema.virtual('id').get(function () {
+  return this._id.toHexString();
+});
+
+SummonersSchema.set('toObject', { virtuals: true });
+SummonersSchema.set('toJSON', { virtuals: true });
