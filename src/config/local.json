@@ -1,0 +1,6 @@
+{
+  "configCrawler": {
+    "fromBlock": 1000000,
+    "crawlerGroup": "local"
+  }
+}

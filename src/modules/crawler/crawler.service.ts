@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Crawlers, CrawlersDocument } from './crawlers.schema';
 import { Model } from 'mongoose';
+import config from '../../config';
 
 @Injectable()
 export class CrawlerService {
@@ -10,14 +11,14 @@ export class CrawlerService {
   async getCrawler(crawlerName: string): Promise<CrawlersDocument> {
     const crawler = await this.crawlersModel.findOne({
       crawlerName,
-      crawlerGroup: null,
+      crawlerGroup: config.configCrawler.crawlerGroup,
     });
     if (!crawler) {
       const newCrawler = new this.crawlersModel({
         crawlerName,
-        crawlerGroup: null,
+        crawlerGroup: config.configCrawler.crawlerGroup,
         //TODO define last block
-        lastBlock: 100000,
+        lastBlock: config.configCrawler.fromBlock,
       });
       await newCrawler.save();
     }
@@ -28,7 +29,7 @@ export class CrawlerService {
     await this.crawlersModel.updateOne(
       {
         crawlerName,
-        crawlerGroup: null,
+        crawlerGroup: config.configCrawler.crawlerGroup,
       },
       { $set: { lastBlock } },
     );
