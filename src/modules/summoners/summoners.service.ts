@@ -4,6 +4,7 @@ import {Summoners, SummonersDocument} from "./summoners.schema";
 import {ClientSession, Model} from 'mongoose';
 import {randomMinMax} from "../../shares/utils";
 import {getARandomSummonerClass} from "./summoners.cls.enum";
+import {SummonerNotExistException} from "./summoners.exceptions";
 @Injectable()
 export class SummonersService {
   constructor(
@@ -12,7 +13,7 @@ export class SummonersService {
 
   async startTransaction(): Promise<ClientSession> {
     const session = await this.summonersModel.startSession();
-    session.startTransaction();
+    await session.startTransaction();
     return session;
   }
 
@@ -27,5 +28,11 @@ export class SummonersService {
     } catch (e) {
       console.error(`Create summoner ${summonerId} for ${userAddress}\n ${e}`);
     }
+  }
+
+  async getSummonersInfo(summonerId: number): Promise<SummonersDocument> {
+    const summoner = await this.summonersModel.findOne({ summonerId });
+    if (summoner === null || summoner === undefined) throw new SummonerNotExistException(summonerId);
+    return summoner;
   }
 }

@@ -6,6 +6,10 @@ export function randomMinMax(minNumber: number, maxNumber: number) {
   return Math.floor(Math.random() * diff) + minNumber;
 }
 
+export function valueNullOrUndefined(x: unknown) {
+  return (x === null || x === undefined);
+}
+
 let mongod: MongoMemoryServer;
 export const rootMongooseTestModule = (options: MongooseModuleOptions = {}) => MongooseModule.forRootAsync({
   useFactory: async () => {
