@@ -9,22 +9,27 @@ export const mumbai: Network = {
   _defaultProvider: (providers) => new providers.JsonRpcProvider('https://rpc-mumbai.matic.today'),
 };
 
+export const networkConfig = {
+  mumbai: mumbai,
+};
+
 let _provider: ethers.providers.BaseProvider;
 export function getProvider() {
   if (valueNullOrUndefined(_provider)) {
-    _provider = ethers.getDefaultProvider(config.network);
+    console.log(config.network);
+    _provider = ethers.getDefaultProvider(networkConfig[config.network]);
   }
   return _provider;
 }
 
 export async function getLatestBlock(): Promise<number> {
-  const provider = this.getProvider();
+  const provider = getProvider();
   return await provider.getBlockNumber();
 }
 
 export function getContractInstance(address: string, contractInterface: ContractInterface): Contract {
-  const provider = this.getProvider();
-  return provider.getContract(address, contractInterface);
+  const provider = getProvider();
+  return new Contract(address, contractInterface, provider);
 }
 
 export async function getContractAllEvents(contract: Contract, fromBlock: number, toBlock: number): Promise<Event[]> {
