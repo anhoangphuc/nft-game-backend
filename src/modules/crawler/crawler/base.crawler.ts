@@ -21,7 +21,7 @@ export abstract class BaseCrawler {
   private _countBlockNotChange = 1;
   private _preBlockNum: number;
   protected constructor(protected readonly crawlerService: CrawlerService) {}
-  public async start(param: ICrawlerParams) {
+  public async start(param?: ICrawlerParams) {
     this.setupParams(param);
     if (!this._crawlerName) throw new Error(`Invalid crawler name`);
     while (true) await this.tick();
