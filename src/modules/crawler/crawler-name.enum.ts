@@ -1,3 +1,3 @@
 export enum CrawlerName {
-  Summoner = 'Summoner',
+  Summoner = 'summoner',
 }
