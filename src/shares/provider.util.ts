@@ -1,5 +1,5 @@
 import { Network } from '@ethersproject/networks';
-import { ethers } from 'ethers';
+import { Contract, ContractInterface, Event, ethers } from 'ethers';
 import config from '../config';
 import { valueNullOrUndefined } from './utils';
 
@@ -20,4 +20,15 @@ export function getProvider() {
 export async function getLatestBlock(): Promise<number> {
   const provider = this.getProvider();
   return await provider.getBlockNumber();
+}
+
+export function getContractInstance(address: string, contractInterface: ContractInterface): Contract {
+  const provider = this.getProvider();
+  return provider.getContract(address, contractInterface);
+}
+
+export async function getContractAllEvents(contract: Contract, fromBlock: number, toBlock: number): Promise<Event[]> {
+  //TODO: Query multiple event then
+  const eventFilter = contract.filters.Transfer();
+  return await contract.queryFilter(eventFilter, fromBlock, toBlock);
 }
