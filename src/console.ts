@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dontenv').config();
+require('dotenv').config();
 import { BootstrapConsole } from 'nestjs-console';
 import { AppModule } from './app.module';
 import { sleep } from './shares/utils';
