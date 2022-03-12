@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CrawlerService } from './crawler.service';
-import { getLatestBlock } from '../../shares/provider.util';
-import { sleep } from '../../shares/utils';
+import { CrawlerService } from '../crawler.service';
+import { getLatestBlock } from '../../../shares/provider.util';
+import { sleep } from '../../../shares/utils';
 
 export interface ICrawlerParams {
   crawlerName?: string;
