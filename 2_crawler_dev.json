@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "dev-game-nft-crawler-summoner",
+      "script": "node",
+      "args": "./dist/console.js start_crawler summoner",
+      "log_date_format": "YYYY-MM-DD hh:mm:ss"
+    }
+  ]
+}
