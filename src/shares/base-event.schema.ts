@@ -26,5 +26,5 @@ export class BaseEvent {
     type: Boolean,
     default: false,
   })
-  isResolved: boolean;
+  isResolved?: boolean;
 }

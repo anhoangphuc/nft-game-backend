@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { BaseEvent } from '../../../shares/base-event.schema';
+import { Document } from 'mongoose';
 
 @Schema({ timestamps: true, collection: 'events-transfer-summoner' })
 export class EventTransferSummoner extends BaseEvent {
@@ -20,5 +21,6 @@ export class EventTransferSummoner extends BaseEvent {
   toAddress: string;
 }
 
+export type EventTransferSummonerDocument = EventTransferSummoner & Document;
 export const EventTransferSummonerSchema = SchemaFactory.createForClass(EventTransferSummoner);
 EventTransferSummonerSchema.index({ tx: 1, blockNumber: 1, logIndex: 1 }, { unique: true });
