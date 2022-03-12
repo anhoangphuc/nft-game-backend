@@ -13,6 +13,9 @@ export interface Config {
     fromBlock: number;
     crawlerGroup: number;
   };
+  addresses: {
+    summoner: string;
+  };
 }
 
 export default config;

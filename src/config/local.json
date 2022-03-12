@@ -3,5 +3,8 @@
     "fromBlock": 1000000,
     "crawlerGroup": "local"
   },
-  "network": "mumbai"
+  "network": "mumbai",
+  "addresses": {
+    "summoner": "0x8C9e303C779c28D85cfE97C5a22F4C66dAbC4549"
+  }
 }
