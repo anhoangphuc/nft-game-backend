@@ -33,7 +33,7 @@ export class SummonerCrawlerUtilsService {
 
   async createNewSummoner(address: string, summonerId: number) {
     try {
-      await this.summonersService.createRandomSummoner(address, summonerId);
+      return await this.summonersService.createRandomSummoner(address, summonerId);
     } catch (e) {
       if (e.message.includes('E11000 duplicate key error collection')) return;
       console.error(`Create eventSummonerTransfer failed ${e.toString()}`);
