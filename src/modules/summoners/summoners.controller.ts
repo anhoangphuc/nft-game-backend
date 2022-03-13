@@ -66,7 +66,6 @@ export class SummonersController {
     const queryFilter = {};
     if (userAddress) queryFilter['userAddress'] = userAddress;
     if (cls) queryFilter['cls'] = cls;
-    // if (cls) queryFilter[cls] = cls;
     const summoners = await this.summonersService.getSummonerInfos(queryFilter);
     return plainToInstance(SummonersPublicInfoResponseDto, summoners);
   }
