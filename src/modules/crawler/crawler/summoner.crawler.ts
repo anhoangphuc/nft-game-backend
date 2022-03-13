@@ -5,7 +5,7 @@ import { CrawlerService } from '../crawler.service';
 import { getContractAllEvents, getContractInstance } from '../../../shares/provider.util';
 import config from '../../../config';
 import * as abi from '../../../shares/contracts/abi/Summoner.json';
-import { callWithChunk } from '../../../shares/utils';
+import { callWithChunk, valueNullOrUndefined } from '../../../shares/utils';
 import { ethers, Event } from 'ethers';
 import { SummonerCrawlerUtilsService } from '../services/summoner-crawler-utils.service';
 
@@ -51,7 +51,7 @@ export class SummonerCrawlerService extends BaseCrawler {
     const { blockNumber, logIndex } = event;
     const logDescription = this.iface.parseLog(event);
     const { from, to, tokenId } = logDescription.args;
-    await this.summonerCrawlerUtilsService.createEventSummonerTransfer({
+    const eventCreated = await this.summonerCrawlerUtilsService.createEventSummonerTransfer({
       summonerId: tokenId.toNumber(),
       fromAddress: from,
       toAddress: to,
@@ -60,7 +60,10 @@ export class SummonerCrawlerService extends BaseCrawler {
       logIndex,
       blockTimestamp: Date.now(),
     });
-
-    await this.summonerCrawlerUtilsService.createNewSummoner(to, tokenId.toNumber());
+    if (eventCreated?.isResolved === false) {
+      const summoner = await this.summonerCrawlerUtilsService.createNewSummoner(to, tokenId.toNumber());
+      if (!valueNullOrUndefined(summoner))
+        await this.summonerCrawlerUtilsService.updateResolvedSummonerTransfer(tx, blockNumber, logIndex);
+    }
   }
 }

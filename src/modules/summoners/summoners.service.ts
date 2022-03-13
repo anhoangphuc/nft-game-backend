@@ -18,15 +18,26 @@ export class SummonersService {
     return session;
   }
 
-  async createRandomSummoner(userAddress: string, summonerId: number): Promise<SummonersDocument> {
+  async createRandomSummoner(
+    userAddress: string,
+    summonerId: number,
+    session?: ClientSession,
+  ): Promise<SummonersDocument> {
     try {
-      return await this.summonersModel.create({
-        summonerId,
-        userAddress,
-        strength: randomMinMax(1, 100),
-        power: randomMinMax(1, 100),
-        cls: getARandomSummonerClass(),
-      });
+      return (
+        await this.summonersModel.create(
+          [
+            {
+              summonerId,
+              userAddress,
+              strength: randomMinMax(1, 100),
+              power: randomMinMax(1, 100),
+              cls: getARandomSummonerClass(),
+            },
+          ],
+          { session },
+        )
+      )[0];
     } catch (e) {
       console.error(`Create summoner ${summonerId} for ${userAddress}\n ${e}`);
     }
