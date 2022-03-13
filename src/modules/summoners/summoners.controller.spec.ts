@@ -36,6 +36,16 @@ describe('SummonersController', () => {
     expect(summoner.userAddress).toEqual('0x123');
   });
 
+  it('get summonerInfos correct', async () => {
+    const address = '0x123';
+    await service.createRandomSummoner(address, 1);
+    await service.createRandomSummoner(address, 2);
+    const summoners = await controller.getPublicSummonerInfos(address);
+    expect(summoners.length).toEqual(2);
+    expect(new Set(summoners.map((x) => x.summonerId))).toContain(1);
+    expect(new Set(summoners.map((x) => x.summonerId))).toContain(2);
+  });
+
   it(`Throw exception when get incorrect summonerId`, async () => {
     await expect(controller.getPublicSummonerInfo(1)).rejects.toThrowError(SummonerNotExistException);
   });
