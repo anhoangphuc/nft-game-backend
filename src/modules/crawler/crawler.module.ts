@@ -7,6 +7,7 @@ import { SummonerCrawlerService } from './crawler/summoner.crawler';
 import { SummonerCrawlerUtilsService } from './services/summoner-crawler-utils.service';
 import { EventTransferSummoner, EventTransferSummonerSchema } from './schemas/summoner-transfer.event.schema';
 import { ConsoleModule } from 'nestjs-console';
+import { SummonersModule } from '../summoners/summoners.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ConsoleModule } from 'nestjs-console';
       { name: EventTransferSummoner.name, schema: EventTransferSummonerSchema },
     ]),
     ConsoleModule,
+    SummonersModule,
   ],
   providers: [CrawlerService, CrawlerConsoleService, SummonerCrawlerService, SummonerCrawlerUtilsService],
 })

@@ -8,5 +8,6 @@ import { Summoners, SummonersSchema } from './summoners.schema';
   imports: [MongooseModule.forFeature([{ name: Summoners.name, schema: SummonersSchema }])],
   controllers: [SummonersController],
   providers: [SummonersService],
+  exports: [SummonersService],
 })
 export class SummonersModule {}
