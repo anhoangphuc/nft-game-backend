@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Summoners, SummonersSchema } from './summoners.schema';
 import { SummonersService } from './summoners.service';
 import { SummonerNotExistException } from './summoners.exceptions';
+import { SummonersClass } from './summoners.cls.enum';
 
 describe('SummonersController', () => {
   let controller: SummonersController;
@@ -40,12 +41,24 @@ describe('SummonersController', () => {
     const address = '0x123';
     await service.createRandomSummoner(address, 1);
     await service.createRandomSummoner(address, 2);
-    const summoners = await controller.getPublicSummonerInfos(address);
+    await service.createRandomSummoner('0x1', 3);
+    const summoners = await controller.getPublicSummonerInfos(address, null);
     expect(summoners.length).toEqual(2);
     expect(new Set(summoners.map((x) => x.summonerId))).toContain(1);
     expect(new Set(summoners.map((x) => x.summonerId))).toContain(2);
   });
 
+  it('get summonerInfos correct', async () => {
+    const address = '0x123';
+    await service.createRandomSummoner(address, 1);
+    await service.createRandomSummoner(address, 2);
+    await service.createRandomSummoner(address, 3);
+    await service.createRandomSummoner(address, 4);
+    await service.createRandomSummoner(address, 5);
+    await service.createRandomSummoner(address, 6);
+    const summoners = await controller.getPublicSummonerInfos(address, SummonersClass.FIGHTER);
+    expect(new Set(summoners.map((x) => x.cls))).toContainEqual(SummonersClass.FIGHTER);
+  });
   it(`Throw exception when get incorrect summonerId`, async () => {
     await expect(controller.getPublicSummonerInfo(1)).rejects.toThrowError(SummonerNotExistException);
   });
