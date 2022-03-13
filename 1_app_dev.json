@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "dev-game-nft-service-api",
+      "script": "node",
+      "args": "./dist/main.js",
+      "log_date_format": "YYYY-MM-DD hh:mm:ss"
+    }
+  ]
+}
