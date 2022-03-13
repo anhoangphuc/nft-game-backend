@@ -36,6 +36,7 @@ export class SummonerCrawlerService extends BaseCrawler {
 
   private async processOneEvent(event: Event) {
     await this._createHistoryRecord(event);
+    this._updateData(event);
   }
 
   private async _createHistoryRecord(event: Event) {
@@ -59,5 +60,9 @@ export class SummonerCrawlerService extends BaseCrawler {
           blockTimestamp: Date.now(),
         });
     }
+  }
+
+  private async _updateData(event: Event) {
+    console.log(event);
   }
 }
