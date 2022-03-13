@@ -48,4 +48,8 @@ export class SummonersService {
     if (summoner === null || summoner === undefined) throw new SummonerNotExistException(summonerId);
     return summoner;
   }
+
+  async getSummonerInfos(queryFilters: unknown): Promise<SummonersDocument[]> {
+    return this.summonersModel.find(queryFilters);
+  }
 }

@@ -1,8 +1,8 @@
-import { Controller, Get, HttpStatus, Param, ParseIntPipe } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import { Controller, Get, HttpStatus, Param, ParseIntPipe, Query } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { SummonersPublicInfoResponseDto } from './summoners.dto';
 import { SummonersService } from './summoners.service';
-import { plainToClass } from 'class-transformer';
+import { plainToClass, plainToInstance } from 'class-transformer';
 
 @Controller('summoners')
 export class SummonersController {
@@ -34,9 +34,29 @@ export class SummonersController {
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Successful',
+    type: SummonersPublicInfoResponseDto,
   })
   async getPublicSummonerInfo(@Param('id', ParseIntPipe) summonerId: number): Promise<SummonersPublicInfoResponseDto> {
     const summoner = await this.summonersService.getSummonersInfo(summonerId);
-    return plainToClass(SummonersPublicInfoResponseDto, summoner);
+    return plainToInstance(SummonersPublicInfoResponseDto, summoner);
+  }
+
+  @Get('')
+  @ApiQuery({
+    name: 'userAddress',
+    description: 'Address of user',
+    type: String,
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Successful',
+    type: SummonersPublicInfoResponseDto,
+    isArray: true,
+  })
+  async getPublicSummonerInfos(@Query('userAddress') userAddress: string): Promise<SummonersPublicInfoResponseDto[]> {
+    const queryFilter = {};
+    if (userAddress) queryFilter[userAddress] = userAddress;
+    const summoners = await this.summonersService.getSummonerInfos(queryFilter);
+    return plainToInstance(SummonersPublicInfoResponseDto, summoners);
   }
 }
